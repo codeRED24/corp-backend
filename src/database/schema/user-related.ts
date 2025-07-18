@@ -8,7 +8,6 @@ import {
   integer,
   decimal,
 } from 'drizzle-orm/pg-core';
-import { interest_types } from './extra';
 import { product_variants, products } from './product-related';
 
 export const users = pgTable('users', {
@@ -19,13 +18,10 @@ export const users = pgTable('users', {
   password: varchar('password', { length: 255 }).notNull(),
   address: jsonb('address'),
   is_verified: boolean('is_verified').default(false),
+  is_premium: boolean('is_premium').default(false),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
   last_login: timestamp('last_login').defaultNow(),
-  is_premium: boolean('is_premium').default(false),
-  interest_id: integer('interest_id').references(
-    () => interest_types.interest_id,
-  ),
 });
 
 export const wishlists = pgTable('wishlists', {
@@ -99,4 +95,40 @@ export const payments = pgTable('payments', {
   status: varchar('status', { length: 50 }).notNull().default('pending'),
   transaction_id: varchar('transaction_id', { length: 255 }),
   created_at: timestamp('created_at').defaultNow(),
+});
+
+export const saved_addresses = pgTable('saved_addresses', {
+  saved_address_id: serial('saved_address_id').primaryKey(),
+  user_id: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  house_number: varchar('house_number', { length: 255 }).notNull(),
+  street_name: varchar('street_name', { length: 255 }).notNull(),
+  city: varchar('city', { length: 50 }).notNull(),
+  state: varchar('state', { length: 50 }).notNull(),
+  zip_code: varchar('zip_code', { length: 6 }).notNull(),
+  country: varchar('country', { length: 50 }).notNull(),
+  latitude: decimal('latitude', { precision: 9, scale: 6 }).notNull(),
+  longitude: decimal('longitude', { precision: 9, scale: 6 }).notNull(),
+  created_at: timestamp('created_at').defaultNow(),
+  updated_at: timestamp('updated_at').defaultNow(),
+});
+
+export const vendor = pgTable('vendor', {
+  vendor_id: serial('vendor_id').primaryKey(),
+  vendor_name: varchar('vendor_name', { length: 255 }).notNull(),
+  vendor_gst_number: varchar('vendor_gst_number', { length: 255 }).notNull(),
+  vendor_address: varchar('vendor_address', { length: 255 }).notNull(),
+  vendor_latitude: decimal('vendor_latitude', {
+    precision: 9,
+    scale: 6,
+  }).notNull(),
+  vendor_longitude: decimal('vendor_longitude', {
+    precision: 9,
+    scale: 6,
+  }).notNull(),
+  pin_code: varchar('pin_code', { length: 6 }).notNull(),
+  type: varchar('type', { length: 50 }).notNull(),
+  created_at: timestamp('created_at').defaultNow(),
+  updated_at: timestamp('updated_at').defaultNow(),
 });
