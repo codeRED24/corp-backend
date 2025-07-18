@@ -114,6 +114,14 @@ export interface Payments {
   user_id: number;
 }
 
+export interface ProductInterestList {
+  created_at: Generated<Timestamp | null>;
+  interest_id: number;
+  product_id: number;
+  product_interest_list_id: Generated<number>;
+  updated_at: Generated<Timestamp | null>;
+}
+
 export interface Products {
   base_price: Numeric;
   category_id: number;
@@ -121,9 +129,9 @@ export interface Products {
   description: string | null;
   is_active: Generated<boolean | null>;
   name: string;
-  primary_interest: number;
   product_id: Generated<number>;
   updated_at: Generated<Timestamp | null>;
+  vendor_id: number | null;
 }
 
 export interface ProductSpecifications {
@@ -152,12 +160,34 @@ export interface ProductVariants {
   weight_in_gm: Numeric | null;
 }
 
+export interface SavedAddresses {
+  city: string;
+  country: string;
+  created_at: Generated<Timestamp | null>;
+  house_number: string;
+  latitude: Numeric;
+  longitude: Numeric;
+  saved_address_id: Generated<number>;
+  state: string;
+  street_name: string;
+  updated_at: Generated<Timestamp | null>;
+  user_id: number;
+  zip_code: string;
+}
+
+export interface UserInterestList {
+  created_at: Generated<Timestamp | null>;
+  interest_id: number;
+  updated_at: Generated<Timestamp | null>;
+  user_id: number;
+  user_interest_list_id: Generated<number>;
+}
+
 export interface Users {
   address: Json | null;
   created_at: Generated<Timestamp | null>;
   email: string;
   id: Generated<number>;
-  interest_id: number | null;
   is_premium: Generated<boolean | null>;
   is_verified: Generated<boolean | null>;
   last_login: Generated<Timestamp | null>;
@@ -177,6 +207,19 @@ export interface VariantSpecifications {
   variant_spec_id: Generated<number>;
 }
 
+export interface Vendor {
+  created_at: Generated<Timestamp | null>;
+  pin_code: string | null;
+  type: string;
+  updated_at: Generated<Timestamp | null>;
+  vendor_address: string | null;
+  vendor_gst_number: string | null;
+  vendor_id: Generated<number>;
+  vendor_latitude: Numeric | null;
+  vendor_longitude: Numeric | null;
+  vendor_name: string;
+}
+
 export interface Wishlists {
   created_at: Generated<Timestamp | null>;
   id: Generated<number>;
@@ -194,10 +237,14 @@ export interface DB {
   order_items: OrderItems;
   orders: Orders;
   payments: Payments;
+  product_interest_list: ProductInterestList;
   product_specifications: ProductSpecifications;
   product_variants: ProductVariants;
   products: Products;
+  saved_addresses: SavedAddresses;
+  user_interest_list: UserInterestList;
   users: Users;
   variant_specifications: VariantSpecifications;
+  vendor: Vendor;
   wishlists: Wishlists;
 }
