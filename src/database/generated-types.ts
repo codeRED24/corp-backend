@@ -51,13 +51,15 @@ export interface Coupons {
   coupon_id: Generated<number>;
   created_at: Generated<Timestamp | null>;
   description: string | null;
-  description_value: Numeric;
   discount_type: string;
+  discount_value: Numeric;
   end_date: Timestamp;
-  max_order_value: Numeric | null;
+  is_active: Generated<boolean | null>;
+  max_discount_value: Numeric | null;
   min_order_value: Generated<Numeric | null>;
   start_date: Timestamp;
   updated_at: Generated<Timestamp | null>;
+  usage_limit: Generated<number | null>;
 }
 
 export interface CouponUsages {
@@ -76,6 +78,7 @@ export interface DrizzleDrizzleMigrations {
 
 export interface InterestType {
   created_at: Generated<Timestamp | null>;
+  description: string | null;
   interest_id: Generated<number>;
   interest_name: string;
   updated_at: Generated<Timestamp | null>;
@@ -114,6 +117,14 @@ export interface Payments {
   user_id: number;
 }
 
+export interface ProductInterestList {
+  created_at: Generated<Timestamp | null>;
+  interest_id: number;
+  product_id: number;
+  product_interest_list_id: Generated<number>;
+  updated_at: Generated<Timestamp | null>;
+}
+
 export interface Products {
   base_price: Numeric;
   category_id: number;
@@ -121,9 +132,9 @@ export interface Products {
   description: string | null;
   is_active: Generated<boolean | null>;
   name: string;
-  primary_interest: number;
   product_id: Generated<number>;
   updated_at: Generated<Timestamp | null>;
+  vendor_id: number | null;
 }
 
 export interface ProductSpecifications {
@@ -152,12 +163,34 @@ export interface ProductVariants {
   weight_in_gm: Numeric | null;
 }
 
+export interface SavedAddresses {
+  city: string;
+  country: string;
+  created_at: Generated<Timestamp | null>;
+  house_number: string;
+  latitude: Numeric;
+  longitude: Numeric;
+  saved_address_id: Generated<number>;
+  state: string;
+  street_name: string;
+  updated_at: Generated<Timestamp | null>;
+  user_id: number;
+  zip_code: string;
+}
+
+export interface UserInterestList {
+  created_at: Generated<Timestamp | null>;
+  interest_id: number;
+  updated_at: Generated<Timestamp | null>;
+  user_id: number;
+  user_interest_list_id: Generated<number>;
+}
+
 export interface Users {
   address: Json | null;
   created_at: Generated<Timestamp | null>;
   email: string;
   id: Generated<number>;
-  interest_id: number | null;
   is_premium: Generated<boolean | null>;
   is_verified: Generated<boolean | null>;
   last_login: Generated<Timestamp | null>;
@@ -177,6 +210,19 @@ export interface VariantSpecifications {
   variant_spec_id: Generated<number>;
 }
 
+export interface Vendor {
+  created_at: Generated<Timestamp | null>;
+  pin_code: string;
+  type: string;
+  updated_at: Generated<Timestamp | null>;
+  vendor_address: string;
+  vendor_gst_number: string;
+  vendor_id: Generated<number>;
+  vendor_latitude: Numeric;
+  vendor_longitude: Numeric;
+  vendor_name: string;
+}
+
 export interface Wishlists {
   created_at: Generated<Timestamp | null>;
   id: Generated<number>;
@@ -194,10 +240,14 @@ export interface DB {
   order_items: OrderItems;
   orders: Orders;
   payments: Payments;
+  product_interest_list: ProductInterestList;
   product_specifications: ProductSpecifications;
   product_variants: ProductVariants;
   products: Products;
+  saved_addresses: SavedAddresses;
+  user_interest_list: UserInterestList;
   users: Users;
   variant_specifications: VariantSpecifications;
+  vendor: Vendor;
   wishlists: Wishlists;
 }

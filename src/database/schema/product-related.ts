@@ -8,7 +8,7 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { interest_types } from './extra';
+import { vendor } from './user-related';
 
 export const categories = pgTable('categories', {
   category_id: serial('category_id').primaryKey(),
@@ -28,9 +28,7 @@ export const products = pgTable('products', {
   description: text('description'),
   base_price: decimal('base_price', { precision: 10, scale: 2 }).notNull(),
   is_active: boolean('is_active').default(true),
-  primary_interest: integer('primary_interest')
-    .notNull()
-    .references(() => interest_types.interest_id),
+  vendor_id: integer('vendor_id').references(() => vendor.vendor_id),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
