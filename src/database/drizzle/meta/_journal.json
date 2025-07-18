@@ -15,6 +15,27 @@
       "when": 1752825630903,
       "tag": "0001_late_bulldozer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752848495007,
+      "tag": "0002_watery_omega_sentinel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752850353232,
+      "tag": "0003_yellow_jetstream",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1752851241421,
+      "tag": "0004_windy_changeling",
+      "breakpoints": true
     }
   ]
 }

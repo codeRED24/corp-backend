@@ -51,13 +51,15 @@ export interface Coupons {
   coupon_id: Generated<number>;
   created_at: Generated<Timestamp | null>;
   description: string | null;
-  description_value: Numeric;
   discount_type: string;
+  discount_value: Numeric;
   end_date: Timestamp;
-  max_order_value: Numeric | null;
+  is_active: Generated<boolean | null>;
+  max_discount_value: Numeric | null;
   min_order_value: Generated<Numeric | null>;
   start_date: Timestamp;
   updated_at: Generated<Timestamp | null>;
+  usage_limit: Generated<number | null>;
 }
 
 export interface CouponUsages {
@@ -76,6 +78,7 @@ export interface DrizzleDrizzleMigrations {
 
 export interface InterestType {
   created_at: Generated<Timestamp | null>;
+  description: string | null;
   interest_id: Generated<number>;
   interest_name: string;
   updated_at: Generated<Timestamp | null>;
@@ -209,14 +212,14 @@ export interface VariantSpecifications {
 
 export interface Vendor {
   created_at: Generated<Timestamp | null>;
-  pin_code: string | null;
+  pin_code: string;
   type: string;
   updated_at: Generated<Timestamp | null>;
-  vendor_address: string | null;
-  vendor_gst_number: string | null;
+  vendor_address: string;
+  vendor_gst_number: string;
   vendor_id: Generated<number>;
-  vendor_latitude: Numeric | null;
-  vendor_longitude: Numeric | null;
+  vendor_latitude: Numeric;
+  vendor_longitude: Numeric;
   vendor_name: string;
 }
 

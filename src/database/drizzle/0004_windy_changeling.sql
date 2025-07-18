@@ -1,0 +1,1 @@
+ALTER TABLE "interest_type" ADD COLUMN "description" text;
