@@ -15,6 +15,7 @@ export const categories = pgTable('categories', {
   name: varchar('name', { length: 255 }).notNull(),
   description: text('description'),
   parent_id: integer('parent_id').references(() => categories.category_id),
+  type: varchar('type', { length: 255 }).notNull(),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
@@ -29,6 +30,7 @@ export const products = pgTable('products', {
   base_price: decimal('base_price', { precision: 10, scale: 2 }).notNull(),
   is_active: boolean('is_active').default(true),
   vendor_id: integer('vendor_id').references(() => vendor.vendor_id),
+  type: varchar('type', { length: 255 }).notNull(),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
