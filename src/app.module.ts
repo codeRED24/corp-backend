@@ -5,6 +5,10 @@ import { VendorModule } from './vendor/vendor.module';
 import { ConfigModule } from '@nestjs/config';
 import { InterestTypeModule } from './interest-type/interest-type.module';
 import { CouponModule } from './coupon/coupon.module';
+import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
+import { ProductSpecsModule } from './product-specs/product-specs.module';
+import { ProductVariantsModule } from './product-variants/product-variants.module';
 
 @Module({
   imports: [
@@ -14,6 +18,10 @@ import { CouponModule } from './coupon/coupon.module';
     VendorModule,
     InterestTypeModule,
     CouponModule,
+    ProductModule,
+    CategoryModule,
+    ProductSpecsModule,
+    ProductVariantsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
