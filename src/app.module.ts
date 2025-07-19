@@ -9,6 +9,7 @@ import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { ProductSpecsModule } from './product-specs/product-specs.module';
 import { ProductVariantsModule } from './product-variants/product-variants.module';
+import { VariantSpecsModule } from './variant-specs/variant-specs.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ProductVariantsModule } from './product-variants/product-variants.modul
     CategoryModule,
     ProductSpecsModule,
     ProductVariantsModule,
+    VariantSpecsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
