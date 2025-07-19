@@ -19,12 +19,11 @@ export class VendorController {
   constructor(private readonly vendorService: VendorService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create fixa new vendor' })
+  @ApiOperation({ summary: 'Create a new vendor' })
   @ApiResponse({
     status: 201,
     description: 'The vendor has been successfully created.',
   })
-  @ApiResponse({ status: 400, description: 'Bad Request.' })
   create(@Body() createVendorDto: CreateVendorDto) {
     return this.vendorService.create(createVendorDto);
   }

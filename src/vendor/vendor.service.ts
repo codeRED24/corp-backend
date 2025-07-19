@@ -55,7 +55,7 @@ export class VendorService {
       .executeTakeFirst();
 
     if (!vendor) {
-      throw new NotFoundException(`Vendor with ID ${id} not found`);
+      throw new NotFoundException(`Vendor not found`);
     }
     return { message: `Vendor deleted` };
   }
