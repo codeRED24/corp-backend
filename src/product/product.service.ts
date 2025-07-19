@@ -26,17 +26,17 @@ export class ProductService {
       .selectAll()
       .where('product_id', '=', id)
       .executeTakeFirst();
-    
+
     if (!product) {
       throw new NotFoundException('Product not found');
     }
-    return product; 
+    return product;
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
     const product = await this.db
       .updateTable('products')
-      .set(updateProductDto)
+      .set({ ...updateProductDto, updated_at: new Date() })
       .where('product_id', '=', id)
       .returningAll()
       .executeTakeFirst();

@@ -100,8 +100,8 @@ export interface Orders {
   created_at: Generated<Timestamp | null>;
   order_date: Generated<Timestamp | null>;
   order_id: Generated<number>;
-  shipping_address: Json;
-  status: string | null;
+  saved_address_id: number;
+  status: Generated<string | null>;
   total_price: Numeric;
   updated_at: Generated<Timestamp | null>;
   user_id: number;

@@ -36,7 +36,7 @@ export class CategoryService {
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     const category = await this.db
       .updateTable('categories')
-      .set(updateCategoryDto)
+      .set({ ...updateCategoryDto, updated_at: new Date() })
       .where('category_id', '=', id)
       .returningAll()
       .executeTakeFirst();

@@ -6,8 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  HttpCode,
-  HttpStatus,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CouponService } from './coupon.service';
 import { CreateCouponDto } from './dto/create-coupon.dto';
@@ -42,8 +41,8 @@ export class CouponController {
   @ApiParam({ name: 'id', type: 'number' })
   @ApiResponse({ status: 200, description: 'Return the coupon.' })
   @ApiResponse({ status: 404, description: 'Coupon not found.' })
-  findOne(@Param('id') id: string) {
-    return this.couponService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.couponService.findOne(id);
   }
 
   @Patch(':id')
@@ -54,8 +53,11 @@ export class CouponController {
     description: 'The coupon has been successfully updated.',
   })
   @ApiResponse({ status: 404, description: 'Coupon not found.' })
-  update(@Param('id') id: string, @Body() updateCouponDto: UpdateCouponDto) {
-    return this.couponService.update(+id, updateCouponDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCouponDto: UpdateCouponDto,
+  ) {
+    return this.couponService.update(id, updateCouponDto);
   }
 
   @Delete(':id')
@@ -65,8 +67,8 @@ export class CouponController {
     status: 200,
     description: 'The coupon has been successfully deleted.',
   })
-  @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string) {
-    return this.couponService.remove(+id);
+  @ApiResponse({ status: 404, description: 'Coupon not found.' })
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.couponService.remove(id);
   }
 }

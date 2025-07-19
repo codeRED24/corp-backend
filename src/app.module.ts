@@ -5,11 +5,11 @@ import { VendorModule } from './vendor/vendor.module';
 import { ConfigModule } from '@nestjs/config';
 import { InterestTypeModule } from './interest-type/interest-type.module';
 import { CouponModule } from './coupon/coupon.module';
-import { CategoryModule } from './category/category.module';
+import { CategoryModule } from './product/category/category.module';
 import { ProductModule } from './product/product.module';
-import { ProductSpecsModule } from './product-specs/product-specs.module';
-import { ProductVariantsModule } from './product-variants/product-variants.module';
-import { VariantSpecsModule } from './variant-specs/variant-specs.module';
+
+import { OrdersModule } from './orders/orders.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -21,9 +21,9 @@ import { VariantSpecsModule } from './variant-specs/variant-specs.module';
     CouponModule,
     ProductModule,
     CategoryModule,
-    ProductSpecsModule,
-    ProductVariantsModule,
-    VariantSpecsModule,
+
+    OrdersModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

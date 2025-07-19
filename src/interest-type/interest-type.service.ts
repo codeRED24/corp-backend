@@ -36,7 +36,7 @@ export class InterestTypeService {
   async update(id: number, updateInterestTypeDto: UpdateInterestTypeDto) {
     const result = await this.db
       .updateTable('interest_type')
-      .set(updateInterestTypeDto)
+      .set({ ...updateInterestTypeDto, updated_at: new Date() })
       .where('interest_id', '=', id)
       .returningAll()
       .executeTakeFirstOrThrow();

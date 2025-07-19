@@ -1,1 +1,0 @@
-ALTER TABLE "coupons" RENAME COLUMN "max_order_value" TO "max_discount_value";

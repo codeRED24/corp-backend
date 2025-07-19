@@ -36,7 +36,7 @@ export class ProductVariantsService {
   async update(id: number, updateProductVariantDto: UpdateProductVariantDto) {
     const productVariant = await this.db
       .updateTable('product_variants')
-      .set(updateProductVariantDto)
+      .set({ ...updateProductVariantDto, updated_at: new Date() })
       .where('variant_id', '=', id)
       .returningAll()
       .executeTakeFirst();

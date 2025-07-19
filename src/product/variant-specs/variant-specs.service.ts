@@ -39,7 +39,7 @@ export class VariantSpecsService {
   async update(id: number, updateVariantSpecDto: UpdateVariantSpecDto) {
     const variantSpec = await this.db
       .updateTable('variant_specifications')
-      .set(updateVariantSpecDto)
+      .set({ ...updateVariantSpecDto, updated_at: new Date() })
       .where('variant_spec_id', '=', id)
       .returningAll()
       .executeTakeFirst();
