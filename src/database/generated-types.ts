@@ -43,6 +43,7 @@ export interface Categories {
   description: string | null;
   name: string;
   parent_id: number | null;
+  type: string;
   updated_at: Generated<Timestamp | null>;
 }
 
@@ -133,6 +134,7 @@ export interface Products {
   is_active: Generated<boolean | null>;
   name: string;
   product_id: Generated<number>;
+  type: string;
   updated_at: Generated<Timestamp | null>;
   vendor_id: number | null;
 }
