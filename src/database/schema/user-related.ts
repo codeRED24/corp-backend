@@ -19,6 +19,7 @@ export const users = pgTable('users', {
   address: jsonb('address'),
   is_verified: boolean('is_verified').default(false),
   is_premium: boolean('is_premium').default(false),
+  user_image: varchar('user_image', { length: 900 }),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
   last_login: timestamp('last_login').defaultNow(),
@@ -134,6 +135,7 @@ export const vendor = pgTable('vendor', {
   }).notNull(),
   pin_code: varchar('pin_code', { length: 6 }).notNull(),
   type: varchar('type', { length: 50 }).notNull(),
+  vendor_image: varchar('vendor_image', { length: 900 }),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
