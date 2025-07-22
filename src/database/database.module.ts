@@ -16,12 +16,12 @@ import { DB } from './generated-types';
           user: configService.get('DB_USER'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_NAME'),
-          ssl: {
-            rejectUnauthorized: false, // For Neon and other cloud databases
-          },
+          // ssl: {
+          //   rejectUnauthorized: false, // For Neon and other cloud databases
+          // },
           max: 20,
           idleTimeoutMillis: 30000,
-          connectionTimeoutMillis: 2000,
+          connectionTimeoutMillis: 10000,
         });
       },
       inject: [ConfigService],

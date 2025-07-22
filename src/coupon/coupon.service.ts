@@ -37,7 +37,7 @@ export class CouponService {
   async update(id: number, updateCouponDto: UpdateCouponDto) {
     const result = await this.db
       .updateTable('coupons')
-      .set(updateCouponDto)
+      .set({ ...updateCouponDto, updated_at: new Date() })
       .where('coupon_id', '=', id)
       .returningAll()
       .executeTakeFirstOrThrow();

@@ -1,6 +1,6 @@
 {
-  "id": "98d5a8cf-d4fe-4bfb-b9ad-172f4c0dab55",
-  "prevId": "49c7bd0a-1abf-4aa8-8234-fd9044230c75",
+  "id": "6c4dc5e8-aa7f-4c95-b4e6-297025b460d8",
+  "prevId": "68ce5645-d223-466c-8056-3f89efbf695b",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -199,6 +199,12 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -410,6 +416,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -681,6 +693,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -1027,24 +1045,25 @@
           "primaryKey": false,
           "notNull": true
         },
+        "saved_address_id": {
+          "name": "saved_address_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pending'"
+        },
         "order_date": {
           "name": "order_date",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
-        },
-        "status": {
-          "name": "status",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "shipping_address": {
-          "name": "shipping_address",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -1072,6 +1091,19 @@
           ],
           "columnsTo": [
             "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orders_saved_address_id_saved_addresses_saved_address_id_fk": {
+          "name": "orders_saved_address_id_saved_addresses_saved_address_id_fk",
+          "tableFrom": "orders",
+          "tableTo": "saved_addresses",
+          "columnsFrom": [
+            "saved_address_id"
+          ],
+          "columnsTo": [
+            "saved_address_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -1451,8 +1483,14 @@
           "primaryKey": true,
           "notNull": true
         },
-        "users": {
-          "name": "users",
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "variant_id": {
+          "name": "variant_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -1474,15 +1512,28 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "wishlists_users_users_id_fk": {
-          "name": "wishlists_users_users_id_fk",
+        "wishlists_user_id_users_id_fk": {
+          "name": "wishlists_user_id_users_id_fk",
           "tableFrom": "wishlists",
           "tableTo": "users",
           "columnsFrom": [
-            "users"
+            "user_id"
           ],
           "columnsTo": [
             "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "wishlists_variant_id_product_variants_variant_id_fk": {
+          "name": "wishlists_variant_id_product_variants_variant_id_fk",
+          "tableFrom": "wishlists",
+          "tableTo": "product_variants",
+          "columnsFrom": [
+            "variant_id"
+          ],
+          "columnsTo": [
+            "variant_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"

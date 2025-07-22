@@ -24,11 +24,31 @@ export const users = pgTable('users', {
   last_login: timestamp('last_login').defaultNow(),
 });
 
-export const wishlists = pgTable('wishlists', {
-  id: serial('id').primaryKey(),
-  users: integer('users')
+export const saved_addresses = pgTable('saved_addresses', {
+  saved_address_id: serial('saved_address_id').primaryKey(),
+  user_id: integer('user_id')
     .notNull()
     .references(() => users.id),
+  house_number: varchar('house_number', { length: 255 }).notNull(),
+  street_name: varchar('street_name', { length: 255 }).notNull(),
+  city: varchar('city', { length: 50 }).notNull(),
+  state: varchar('state', { length: 50 }).notNull(),
+  zip_code: varchar('zip_code', { length: 6 }).notNull(),
+  country: varchar('country', { length: 50 }).notNull(),
+  latitude: decimal('latitude', { precision: 9, scale: 6 }).notNull(),
+  longitude: decimal('longitude', { precision: 9, scale: 6 }).notNull(),
+  created_at: timestamp('created_at').defaultNow(),
+  updated_at: timestamp('updated_at').defaultNow(),
+});
+
+export const wishlists = pgTable('wishlists', {
+  id: serial('id').primaryKey(),
+  user_id: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  variant_id: integer('variant_id')
+    .notNull()
+    .references(() => product_variants.variant_id),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
@@ -55,9 +75,11 @@ export const orders = pgTable('orders', {
     .notNull()
     .references(() => users.id),
   total_price: decimal('total_price', { precision: 10, scale: 2 }).notNull(),
+  saved_address_id: integer('saved_address_id')
+    .notNull()
+    .references(() => saved_addresses.saved_address_id),
+  status: varchar('status', { length: 50 }).default('pending'),
   order_date: timestamp('order_date').defaultNow(),
-  status: varchar('status', { length: 50 }),
-  shipping_address: jsonb('shipping_address').notNull(),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
@@ -95,23 +117,6 @@ export const payments = pgTable('payments', {
   status: varchar('status', { length: 50 }).notNull().default('pending'),
   transaction_id: varchar('transaction_id', { length: 255 }),
   created_at: timestamp('created_at').defaultNow(),
-});
-
-export const saved_addresses = pgTable('saved_addresses', {
-  saved_address_id: serial('saved_address_id').primaryKey(),
-  user_id: integer('user_id')
-    .notNull()
-    .references(() => users.id),
-  house_number: varchar('house_number', { length: 255 }).notNull(),
-  street_name: varchar('street_name', { length: 255 }).notNull(),
-  city: varchar('city', { length: 50 }).notNull(),
-  state: varchar('state', { length: 50 }).notNull(),
-  zip_code: varchar('zip_code', { length: 6 }).notNull(),
-  country: varchar('country', { length: 50 }).notNull(),
-  latitude: decimal('latitude', { precision: 9, scale: 6 }).notNull(),
-  longitude: decimal('longitude', { precision: 9, scale: 6 }).notNull(),
-  created_at: timestamp('created_at').defaultNow(),
-  updated_at: timestamp('updated_at').defaultNow(),
 });
 
 export const vendor = pgTable('vendor', {

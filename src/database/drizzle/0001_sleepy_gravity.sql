@@ -1,0 +1,2 @@
+ALTER TABLE "wishlists" ADD COLUMN "product_id" integer NOT NULL;--> statement-breakpoint
+ALTER TABLE "wishlists" ADD CONSTRAINT "wishlists_product_id_products_product_id_fk" FOREIGN KEY ("product_id") REFERENCES "public"."products"("product_id") ON DELETE no action ON UPDATE no action;

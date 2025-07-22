@@ -1,5 +1,5 @@
 {
-  "id": "6709721a-276c-4789-a2a9-3577169481c7",
+  "id": "07c68169-75f9-4649-a2ab-28527e8dcf7e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -116,8 +116,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "description_value": {
-          "name": "description_value",
+        "discount_value": {
+          "name": "discount_value",
           "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": true
@@ -129,8 +129,8 @@
           "notNull": false,
           "default": "'0.00'"
         },
-        "max_order_value": {
-          "name": "max_order_value",
+        "max_discount_value": {
+          "name": "max_discount_value",
           "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": false
@@ -146,6 +146,20 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
+        },
+        "usage_limit": {
+          "name": "usage_limit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
         },
         "created_at": {
           "name": "created_at",
@@ -186,6 +200,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -204,6 +224,166 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.product_interest_list": {
+      "name": "product_interest_list",
+      "schema": "",
+      "columns": {
+        "product_interest_list_id": {
+          "name": "product_interest_list_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "interest_id": {
+          "name": "interest_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "product_interest_list_product_id_products_product_id_fk": {
+          "name": "product_interest_list_product_id_products_product_id_fk",
+          "tableFrom": "product_interest_list",
+          "tableTo": "products",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "product_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "product_interest_list_interest_id_interest_type_interest_id_fk": {
+          "name": "product_interest_list_interest_id_interest_type_interest_id_fk",
+          "tableFrom": "product_interest_list",
+          "tableTo": "interest_type",
+          "columnsFrom": [
+            "interest_id"
+          ],
+          "columnsTo": [
+            "interest_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "product_interest_list_product_id_interest_id_pk": {
+          "name": "product_interest_list_product_id_interest_id_pk",
+          "columns": [
+            "product_id",
+            "interest_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.user_interest_list": {
+      "name": "user_interest_list",
+      "schema": "",
+      "columns": {
+        "user_interest_list_id": {
+          "name": "user_interest_list_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "interest_id": {
+          "name": "interest_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_interest_list_user_id_users_id_fk": {
+          "name": "user_interest_list_user_id_users_id_fk",
+          "tableFrom": "user_interest_list",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "user_interest_list_interest_id_interest_type_interest_id_fk": {
+          "name": "user_interest_list_interest_id_interest_type_interest_id_fk",
+          "tableFrom": "user_interest_list",
+          "tableTo": "interest_type",
+          "columnsFrom": [
+            "interest_id"
+          ],
+          "columnsTo": [
+            "interest_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_interest_list_user_id_interest_id_pk": {
+          "name": "user_interest_list_user_id_interest_id_pk",
+          "columns": [
+            "user_id",
+            "interest_id"
+          ]
+        }
+      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -236,6 +416,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -502,9 +688,15 @@
           "notNull": false,
           "default": true
         },
-        "primary_interest": {
-          "name": "primary_interest",
+        "vendor_id": {
+          "name": "vendor_id",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
@@ -538,15 +730,15 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "products_primary_interest_interest_type_interest_id_fk": {
-          "name": "products_primary_interest_interest_type_interest_id_fk",
+        "products_vendor_id_vendor_vendor_id_fk": {
+          "name": "products_vendor_id_vendor_vendor_id_fk",
           "tableFrom": "products",
-          "tableTo": "interest_type",
+          "tableTo": "vendor",
           "columnsFrom": [
-            "primary_interest"
+            "vendor_id"
           ],
           "columnsTo": [
-            "interest_id"
+            "vendor_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -853,24 +1045,25 @@
           "primaryKey": false,
           "notNull": true
         },
+        "saved_address_id": {
+          "name": "saved_address_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pending'"
+        },
         "order_date": {
           "name": "order_date",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
-        },
-        "status": {
-          "name": "status",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "shipping_address": {
-          "name": "shipping_address",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -898,6 +1091,19 @@
           ],
           "columnsTo": [
             "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orders_saved_address_id_saved_addresses_saved_address_id_fk": {
+          "name": "orders_saved_address_id_saved_addresses_saved_address_id_fk",
+          "tableFrom": "orders",
+          "tableTo": "saved_addresses",
+          "columnsFrom": [
+            "saved_address_id"
+          ],
+          "columnsTo": [
+            "saved_address_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -999,6 +1205,107 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.saved_addresses": {
+      "name": "saved_addresses",
+      "schema": "",
+      "columns": {
+        "saved_address_id": {
+          "name": "saved_address_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "house_number": {
+          "name": "house_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "street_name": {
+          "name": "street_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state": {
+          "name": "state",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "zip_code": {
+          "name": "zip_code",
+          "type": "varchar(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "country": {
+          "name": "country",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "saved_addresses_user_id_users_id_fk": {
+          "name": "saved_addresses_user_id_users_id_fk",
+          "tableFrom": "saved_addresses",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.users": {
       "name": "users",
       "schema": "",
@@ -1046,6 +1353,13 @@
           "notNull": false,
           "default": false
         },
+        "is_premium": {
+          "name": "is_premium",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -1066,37 +1380,10 @@
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
-        },
-        "is_premium": {
-          "name": "is_premium",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
-        "interest_id": {
-          "name": "interest_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "users_interest_id_interest_type_interest_id_fk": {
-          "name": "users_interest_id_interest_type_interest_id_fk",
-          "tableFrom": "users",
-          "tableTo": "interest_type",
-          "columnsFrom": [
-            "interest_id"
-          ],
-          "columnsTo": [
-            "interest_id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "users_email_unique": {
@@ -1107,6 +1394,81 @@
           ]
         }
       },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.vendor": {
+      "name": "vendor",
+      "schema": "",
+      "columns": {
+        "vendor_id": {
+          "name": "vendor_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vendor_name": {
+          "name": "vendor_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vendor_gst_number": {
+          "name": "vendor_gst_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vendor_address": {
+          "name": "vendor_address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vendor_latitude": {
+          "name": "vendor_latitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vendor_longitude": {
+          "name": "vendor_longitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pin_code": {
+          "name": "pin_code",
+          "type": "varchar(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

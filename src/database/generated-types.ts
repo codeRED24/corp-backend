@@ -43,6 +43,7 @@ export interface Categories {
   description: string | null;
   name: string;
   parent_id: number | null;
+  type: string;
   updated_at: Generated<Timestamp | null>;
 }
 
@@ -99,8 +100,8 @@ export interface Orders {
   created_at: Generated<Timestamp | null>;
   order_date: Generated<Timestamp | null>;
   order_id: Generated<number>;
-  shipping_address: Json;
-  status: string | null;
+  saved_address_id: number;
+  status: Generated<string | null>;
   total_price: Numeric;
   updated_at: Generated<Timestamp | null>;
   user_id: number;
@@ -133,6 +134,7 @@ export interface Products {
   is_active: Generated<boolean | null>;
   name: string;
   product_id: Generated<number>;
+  type: string;
   updated_at: Generated<Timestamp | null>;
   vendor_id: number | null;
 }
@@ -227,7 +229,8 @@ export interface Wishlists {
   created_at: Generated<Timestamp | null>;
   id: Generated<number>;
   updated_at: Generated<Timestamp | null>;
-  users: number;
+  user_id: number;
+  variant_id: number;
 }
 
 export interface DB {

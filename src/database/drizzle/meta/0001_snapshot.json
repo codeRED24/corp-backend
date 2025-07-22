@@ -1,6 +1,6 @@
 {
-  "id": "1fba064b-6ced-4a8f-81c5-0791f953e230",
-  "prevId": "6709721a-276c-4789-a2a9-3577169481c7",
+  "id": "574a1c29-011d-4135-8341-36594116e629",
+  "prevId": "07c68169-75f9-4649-a2ab-28527e8dcf7e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -116,8 +116,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "description_value": {
-          "name": "description_value",
+        "discount_value": {
+          "name": "discount_value",
           "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": true
@@ -129,8 +129,8 @@
           "notNull": false,
           "default": "'0.00'"
         },
-        "max_order_value": {
-          "name": "max_order_value",
+        "max_discount_value": {
+          "name": "max_discount_value",
           "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": false
@@ -146,6 +146,20 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
+        },
+        "usage_limit": {
+          "name": "usage_limit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
         },
         "created_at": {
           "name": "created_at",
@@ -185,6 +199,12 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -396,6 +416,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -667,6 +693,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -1013,24 +1045,25 @@
           "primaryKey": false,
           "notNull": true
         },
+        "saved_address_id": {
+          "name": "saved_address_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pending'"
+        },
         "order_date": {
           "name": "order_date",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
-        },
-        "status": {
-          "name": "status",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "shipping_address": {
-          "name": "shipping_address",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -1058,6 +1091,19 @@
           ],
           "columnsTo": [
             "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orders_saved_address_id_saved_addresses_saved_address_id_fk": {
+          "name": "orders_saved_address_id_saved_addresses_saved_address_id_fk",
+          "tableFrom": "orders",
+          "tableTo": "saved_addresses",
+          "columnsFrom": [
+            "saved_address_id"
+          ],
+          "columnsTo": [
+            "saved_address_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -1372,31 +1418,31 @@
           "name": "vendor_gst_number",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "vendor_address": {
           "name": "vendor_address",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "vendor_latitude": {
           "name": "vendor_latitude",
           "type": "numeric(9, 6)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "vendor_longitude": {
           "name": "vendor_longitude",
           "type": "numeric(9, 6)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "pin_code": {
           "name": "pin_code",
           "type": "varchar(6)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "type": {
           "name": "type",
@@ -1443,6 +1489,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -1469,6 +1521,19 @@
           ],
           "columnsTo": [
             "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "wishlists_product_id_products_product_id_fk": {
+          "name": "wishlists_product_id_products_product_id_fk",
+          "tableFrom": "wishlists",
+          "tableTo": "products",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "product_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"

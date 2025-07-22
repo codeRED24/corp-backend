@@ -36,7 +36,7 @@ export class VendorService {
   async update(id: number, updateVendorDto: UpdateVendorDto) {
     const vendor = await this.db
       .updateTable('vendor')
-      .set(updateVendorDto)
+      .set({ ...updateVendorDto, updated_at: new Date() })
       .where('vendor_id', '=', id)
       .returningAll()
       .executeTakeFirst();
@@ -55,7 +55,7 @@ export class VendorService {
       .executeTakeFirst();
 
     if (!vendor) {
-      throw new NotFoundException(`Vendor with ID ${id} not found`);
+      throw new NotFoundException(`Vendor not found`);
     }
     return { message: `Vendor deleted` };
   }
