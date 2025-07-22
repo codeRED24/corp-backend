@@ -134,6 +134,7 @@ export interface Products {
   is_active: Generated<boolean | null>;
   name: string;
   product_id: Generated<number>;
+  product_image: string | null;
   type: string;
   updated_at: Generated<Timestamp | null>;
   vendor_id: number | null;
@@ -162,6 +163,7 @@ export interface ProductVariants {
   sku: string | null;
   updated_at: Generated<Timestamp | null>;
   variant_id: Generated<number>;
+  variant_image: string | null;
   weight_in_gm: Numeric | null;
 }
 
@@ -199,6 +201,7 @@ export interface Users {
   name: string;
   password: string;
   updated_at: Generated<Timestamp | null>;
+  user_image: string | null;
   user_type: string | null;
 }
 
@@ -220,6 +223,7 @@ export interface Vendor {
   vendor_address: string;
   vendor_gst_number: string;
   vendor_id: Generated<number>;
+  vendor_image: string | null;
   vendor_latitude: Numeric;
   vendor_longitude: Numeric;
   vendor_name: string;

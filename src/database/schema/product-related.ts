@@ -31,6 +31,10 @@ export const products = pgTable('products', {
   is_active: boolean('is_active').default(true),
   vendor_id: integer('vendor_id').references(() => vendor.vendor_id),
   type: varchar('type', { length: 255 }).notNull(),
+  product_image1: varchar('product_image', { length: 900 }),
+  product_image2: varchar('product_image', { length: 900 }),
+  product_image3: varchar('product_image', { length: 900 }),
+  product_image4: varchar('product_image', { length: 900 }),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
@@ -64,6 +68,10 @@ export const product_variants = pgTable('product_variants', {
     precision: 10,
     scale: 2,
   }),
+  variant_image1: varchar('variant_image', { length: 900 }),
+  variant_image2: varchar('variant_image', { length: 900 }),
+  variant_image3: varchar('variant_image', { length: 900 }),
+  variant_image4: varchar('variant_image', { length: 900 }),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });
