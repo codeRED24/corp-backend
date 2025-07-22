@@ -4,6 +4,8 @@ import { AllExceptionsFilter } from './common/filters/postgres-exception.filter'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
+const port = process.env.PORT || 8000;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
@@ -17,6 +19,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(8000);
+  await app.listen(port);
 }
 bootstrap();
