@@ -11,8 +11,9 @@ import {
 import { InterestTypeService } from './interest-type.service';
 import { CreateInterestTypeDto } from './dto/create-interest-type.dto';
 import { UpdateInterestTypeDto } from './dto/update-interest-type.dto';
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('interest-type')
 @Controller('interest-type')
 export class InterestTypeController {
   constructor(private readonly interestTypeService: InterestTypeService) {}

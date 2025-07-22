@@ -229,7 +229,8 @@ export interface Wishlists {
   created_at: Generated<Timestamp | null>;
   id: Generated<number>;
   updated_at: Generated<Timestamp | null>;
-  users: number;
+  user_id: number;
+  variant_id: number;
 }
 
 export interface DB {

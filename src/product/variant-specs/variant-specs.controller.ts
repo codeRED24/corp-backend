@@ -13,7 +13,7 @@ import { CreateVariantSpecDto } from './dto/create-variant-spec.dto';
 import { UpdateVariantSpecDto } from './dto/update-variant-spec.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Product')
+@ApiTags('product')
 @Controller('variant-specs')
 export class VariantSpecsController {
   constructor(private readonly variantSpecsService: VariantSpecsService) {}

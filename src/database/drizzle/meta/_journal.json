@@ -8,6 +8,27 @@
       "when": 1752924933220,
       "tag": "0000_optimal_pestilence",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1753073336378,
+      "tag": "0001_sleepy_gravity",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753084760302,
+      "tag": "0002_lonely_wallflower",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1753084824266,
+      "tag": "0003_material_gunslinger",
+      "breakpoints": true
     }
   ]
 }

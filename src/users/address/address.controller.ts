@@ -13,7 +13,7 @@ import { CreateAddressDto } from './dto/create-address.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UpdateAddressDto } from './dto/update-address.dto';
 
-@ApiTags('Users')
+@ApiTags('user')
 @Controller('users/address')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}

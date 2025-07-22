@@ -43,9 +43,12 @@ export const saved_addresses = pgTable('saved_addresses', {
 
 export const wishlists = pgTable('wishlists', {
   id: serial('id').primaryKey(),
-  users: integer('users')
+  user_id: integer('user_id')
     .notNull()
     .references(() => users.id),
+  variant_id: integer('variant_id')
+    .notNull()
+    .references(() => product_variants.variant_id),
   created_at: timestamp('created_at').defaultNow(),
   updated_at: timestamp('updated_at').defaultNow(),
 });

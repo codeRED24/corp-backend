@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class CreateOrderDto {
-  @ApiProperty({ example: '100', description: 'User ID' })
+export class CreateUserInterestDto {
+  @ApiProperty({ description: 'User ID', example: 1 })
   @IsNumber()
   @IsNotEmpty()
   user_id: number;
 
-  @ApiProperty({ description: 'Saved address ID' })
+  @ApiProperty({ description: 'Interest ID', example: 1 })
   @IsNumber()
   @IsNotEmpty()
-  saved_address_id: number;
+  interest_id: number;
 }

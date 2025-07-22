@@ -13,7 +13,7 @@ import { CreateProductSpecDto } from './dto/create-product-spec.dto';
 import { UpdateProductSpecDto } from './dto/update-product-spec.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Product')
+@ApiTags('product')
 @Controller('product-specs')
 export class ProductSpecsController {
   constructor(private readonly productSpecsService: ProductSpecsService) {}
